@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 import "./BummyMinting.sol";
 import "./Interface/BummyCoreInterface.sol";
 
-contract BummyCore is BummyMinting, BummyCoreInterface{
+contract BummyCore is BummyMinting, BummyCoreInterface {
     // Set in case the core contract is broken and an upgrade is required
     BummyCoreInterface public newContractAddress;
 
@@ -30,7 +30,8 @@ contract BummyCore is BummyMinting, BummyCoreInterface{
     ///  be paused indefinitely if such an upgrade takes place.)
     /// @param _v2Address new address
     function setNewAddress(address _v2Address) external onlyCEO whenPaused {
-        
+        newContractAddress = BummyCoreInterface(_v2Address);
+        ContractUpgrade(_v2Address);
     }
 
     /// @notice Returns all the relevant information about a specific bummy.
@@ -68,13 +69,3 @@ contract BummyCore is BummyMinting, BummyCoreInterface{
         genes = bum.genes;
     }
 }
-
-   
-  
-
-    
-    
-
-  
-
-    
