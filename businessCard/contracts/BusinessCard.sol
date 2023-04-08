@@ -44,9 +44,9 @@ contract BusinessCardNFT is ERC721Enumerable, Ownable {
 
     modifier isNotRegistered(address user) {
         require(
-            userInfos[user].name == "" &&
-                userInfos[user].organization == "" &&
-                userInfos[user].contact == "",
+            isEmptyString(userInfos[user].name) &&
+                isEmptyString(userInfos[user].organization) &&
+                isEmptyString(userInfos[user].contact),
             "You are already registered"
         );
         _;
